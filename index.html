@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio | Modern Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      :root {
+        --primary-color: #2ecc71;
+        --secondary-color: #27ae60;
+        --dark-color: #2c3e50;
+        --light-color: #ecf0f1;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--dark-color);
+        color: var(--light-color);
+        overflow-x: hidden;
+      }
+
+      /* Particle Background */
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Floating Shapes Animation */
+      .floating-shapes li {
+        position: absolute;
+        list-style: none;
+        background: rgba(255, 255, 255, 0.1);
+        animation: float 20s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-1000px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      /* Glassmorphism Effect */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        margin: 15px;
+      }
+
+      /* Animated Gradient Text */
+      .animated-text {
+        background: linear-gradient(45deg, #2ecc71, #3498db, #9b59b6);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: gradient 3s linear infinite;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Responsive Navigation */
+      .navbar {
+        position: fixed;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: 0.3s;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 4em;
+        margin-bottom: 20px;
+      }
+
+      /* Skills Cloud */
+      .skills-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .skill-tag {
+        padding: 8px 15px;
+        background: var(--primary-color);
+        border-radius: 20px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .skill-tag:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+      }
+
+      /* Project Gallery */
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 50px;
+      }
+
+      .project-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: 0.3s;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+      }
+
+      /* Contact Form */
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group input,
+      .input-group textarea {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 5px;
+        color: white;
+      }
+
+      /* Added CSS for new sections */
+      .section-title {
+        text-align: center;
+        padding: 30px 0;
+        font-size: 2.5em;
+        margin-top: 20px;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        background: var(--primary-color);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+
+      .timeline-content {
+        position: relative;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        top: 10px;
+        z-index: 2;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot {
+        right: -50px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: -50px;
+      }
+
+      .service-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        transition: 0.3s;
+      }
+
+      .service-card i {
+        font-size: 3em;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .testimonial-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px 0;
+      }
+
+      .testimonial-item {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .testimonial-text {
+        font-size: 1.1em;
+        font-style: italic;
+        margin-bottom: 20px;
+      }
+
+      .testimonial-author {
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 50px;
+      }
+
+      .blog-card {
+        overflow: hidden;
+        border-radius: 15px;
+        transition: 0.3s;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .blog-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .blog-content {
+        padding: 20px;
+      }
+
+      .blog-date {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .social-icons a {
+        color: white;
+        font-size: 1.5em;
+        transition: 0.3s;
+      }
+
+      .social-icons a:hover {
+        color: var(--primary-color);
+        transform: translateY(-5px);
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 50px;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .pricing-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        padding: 50px;
+      }
+
+      .pricing-card {
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .pricing-header {
+        color: var(--primary-color);
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .pricing-price {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      .pricing-features {
+        list-style: none;
+        margin-bottom: 20px;
+      }
+
+      .pricing-features li {
+        padding: 5px 0;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: var(--secondary-color);
+        transform: translateY(-3px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5em;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline::after {
+          left: 31px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot,
+        .timeline-item:nth-child(even) .timeline-dot {
+          left: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <!-- Floating Shapes -->
+    <ul class="floating-shapes">
+      <li></li>
+      <li></li>
+      <li></li>
+      <!-- Add more shapes -->
+    </ul>
+
+    <nav class="navbar glass-card">
+      <h1 class="animated-text">MyPortfolio</h1>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Eskul saya</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#blog">permainan saya</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1 class="animated-text">Hi, I'm <span>syahrul ramadhan</span></h1>
+        <p>Web Developer & Creative Designer</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">About Me</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: center">
+        <div style="flex: 1; min-width: 300px">
+          <img src="gambar/foto.syahrul.jpeg" alt="Profile" style="width: 100%; border-radius: 50%; border: 5px solid var(--primary-color)" />
+        </div>
+        <div style="flex: 2; min-width: 300px">
+          <p style="margin-bottom: 15px">
+            Assalamu’alaikum warahmatullahi wabarakatuh. Perkenalkan, saya syahrul ramadhan, seorang penceramah yang memiliki semangat dalam menyampaikan nilai-nilai keislaman secara inspiratif dan mudah dipahami. Berfokus pada tahsin,
+            tahfiz, dan tilawah, saya aktif dalam Genpita, sebuah platform yang bertujuan untuk membimbing dan meningkatkan kualitas bacaan Al-Qur’an. Selain itu, saya terhubung dengan SMP 1 Sinjai, di mana saya turut serta dalam kegiatan
+            pembelajaran agama dan dakwah.
+          </p>
+          <p style="margin-bottom: 15px">
+            Selain berdakwah, saya juga memiliki ketertarikan dalam dunia teknologi, khususnya dalam bidang pengembangan web. Saya mempelajari HTML, CSS, JavaScript, dan PHP untuk menciptakan website yang bermanfaat, termasuk untuk
+            mendukung dakwah digital. Saya percaya bahwa teknologi dapat menjadi sarana efektif dalam menyebarkan ilmu dan kebaikan. Dengan menggabungkan dakwah dan pemrograman
+          </p>
+          <a href="#contact" class="btn">Hubungi saya ^^</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section (New) -->
+    <section id="skills" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">Skills yang masih saya kembangkan</h2>
+      <div class="project-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px">
+        <!-- Skill 1 -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/css.png" alt="Web Development" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3><strong>CSS</strong></h3>
+          <p>
+            Saya msemiliki keahlian dalam CSS dan telah menggunakannya untuk mendesain berbagai tampilan website yang responsif dan estetis. Saya memahami konsep layout seperti Flexbox dan Grid, serta teknik styling modern seperti animasi
+            dan efek transisi..
+          </p>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/html gambar.png" alt="Canva Editing" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3><strong>HTML</strong></h3>
+          <p>
+            Website yang menarik selalu dimulai dengan kode HTML yang baik. Saya menggunakan HTML untuk membangun struktur yang kokoh, memastikan setiap elemen memiliki peran yang tepat, dan menciptakan pengalaman pengguna yang nyaman..
+          </p>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/canva.webp" alt="Responsive Design" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3>CANVA</h3>
+          <br />
+          <p>saya memiliki keahlian dalam menggunakan Canva untuk membuat berbagai desain grafis, mulai dari poster, presentasi, media sosial, hingga branding.</p>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/github icon" alt="SEO Optimization" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3>GITHUB</h3>
+          <p>aya memiliki pengalaman dalam menggunakan GitHub sebagai platform kolaborasi dalam pengembangan perangkat lunak. Dengan pemahaman yang baik tentang Git, saya dapat mengelola versi kode.</p>
+        </div>
+
+        <!-- Skill 5 (Baru) -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/js.png" alt="Graphic Design" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3>JavaScript</h3>
+          <p>
+            Saya memiliki pengalaman dalam menggunakan JavaScript untuk membangun website yang interaktif dan dinamis. Dengan pemahaman yang baik tentang DOM Manipulation, Event Handling, dan Asynchronous Programming, saya mampu menciptakan
+            pengalaman pengguna yang lebih responsif dan efisien.
+          </p>
+        </div>
+
+        <!-- Skill 6 (Baru) -->
+        <div class="service-card glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center">
+          <div class="circular-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2)">
+            <img src="gambar/download.jpeg" alt="Social Media Management" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <h3>MOBILE LEGEDS</h3>
+          <p>Saya adalah pemain Mobile Legends yang menguasai Yu Zhong sebagai hero andalan. .</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- eskul Section -->
+    <section id="projects" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">Organisasi/Eskul yg saya ikuti</h2>
+      <div class="project-grid">
+        <div class="project-card glass-card">
+          <img src="gambar/WhatsApp Image 2024-11-08 at 01.19.52 (1).jpeg" alt="Project 1" style="width: 100%; border-radius: 10px" />
+          <div style="padding: 15px">
+            <h3>Osis bidang 1</h3>
+            <p>Osis Organisasi Intra sekolah dlm bidang keagamaan</p>
+          </div>
+        </div>
+        <div class="project-card glass-card">
+          <img src="gambar/genpita.JPG" alt="Project 2" style="width: 100%; border-radius: 10px" />
+          <div style="padding: 15px">
+            <h3>Eskul Genpita</h3>
+            <p>Eskul Genpita (generasi pecinta Al quran) adalah eskul agama di UPTD SMP 1 SINJAI</p>
+          </div>
+        </div>
+        <div class="project-card glass-card">
+          <img src="gambar/WhatsApp Image 2024-11-08 at 01.19.52.jpeg" alt="Project 3" style="width: 100%; border-radius: 10px" />
+          <div style="padding: 15px">
+            <h3>Spek.troom</h3>
+            <p>Eskul yg berfokus dlm bidang Teknologi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- gallery -->
+
+    <!-- gallery -->
+
+    <!-- pretasi permainan -->
+    <section id="blog" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">akun bermain game Saya!!</h2>
+      <p></p>
+      <div class="blog-grid">
+        <div class="blog-card glass-card">
+          <img src="gambar/WhatsApp Image 2024-12-12 at 01.41.33.jpeg" alt="Blog 1" class="blog-img" />
+          <div class="blog-content">
+            <p class="blog-date">May 15, 2024</p>
+            <h3>mobile legends</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae, aliquid?</p>
+          </div>
+        </div>
+        <div class="blog-card glass-card">
+          <img src="gambar/WhatsApp Image 2024-12-12 at 01.43.53.jpeg" alt="Blog 2" class="blog-img" />
+          <div class="blog-content">
+            <p class="blog-date">April 28, 2024</p>
+            <h3>free fire</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, velit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section (New) -->
+    <section id="testimonials" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">Inspirasi & Motivasi</h2>
+      <div class="testimonial-container">
+        <div class="testimonial-item glass-card">
+          <p class="testimonial-text">
+            "Ketahuilah bahwa ilmu syar'i adalah ilmu yang menyelamatkan baik di dunia maupun di akhirat. Ilmu yang bertujuan mengangkat derajat seseorang di dunia dan di akhirat, dan kamu bisa menjadi guru bagi orang lain, bukan sekedar
+            menjadi murid."
+          </p>
+          <p class="testimonial-author">- Ustaz Adi Hidayat</p>
+        </div>
+        <div class="testimonial-item glass-card">
+          <p class="testimonial-text">"Semakin tinggi ilmu seseorang, semakin besar rasa malunya untuk berbuat maksiat kepada Allah. Dan semakin tinggi ilmu seseorang, semakin rendah hatinya terhadap manusia."</p>
+          <p class="testimonial-author">- Ustaz Abdul Somad</p>
+        </div>
+        <div class="testimonial-item glass-card">
+          <p class="testimonial-text">"Menuntut ilmu adalah kewajiban bagi setiap muslim. Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan memudahkan baginya jalan menuju surga."</p>
+          <p class="testimonial-author">- Nabi Muhammad SAW</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="glass-card" style="margin: 50px; padding: 30px">
+      <h2 class="section-title animated-text">Get In Touch</h2>
+      <div class="contact-form glass-card">
+        <div class="input-group">
+          <input type="text" placeholder="Your Name" />
+        </div>
+        <div class="input-group">
+          <input type="email" placeholder="Your Email" />
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Subject" />
+        </div>
+        <div class="input-group">
+          <textarea rows="5" placeholder="Your Message"></textarea>
+        </div>
+        <button class="btn" style="border: none; cursor: pointer; width: 100%">Send Message</button>
+      </div>
+      <div style="text-align: center; margin-top: 30px">
+        <p><i class="fas fa-map-marker-alt" style="color: var(--primary-color)"></i> 123 Design Street, Creative City</p>
+        <p><i class="fas fa-phone" style="color: var(--primary-color)"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-envelope" style="color: var(--primary-color)"></i> hello@yourportfolio.com</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
+      </div>
+      <p>&copy; Portofolio ini adalah bagian dari perjalanan saya.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Particles.js Config
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80 },
+          color: { value: "#2ecc71" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3 },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Dynamic Skill Cloud
+      const skills = ["HTML5", "CSS3", "JavaScript", "React", "Node.js", "Python", "UI/UX", "Git", "Responsive Design", "Figma", "TypeScript", "MongoDB", "Express", "Sass", "jQuery", "WordPress", "Adobe XD", "Bootstrap", "GraphQL", "PHP"];
+
+      const cloud = document.getElementById("skills-container");
+
+      skills.forEach((skill) => {
+        const tag = document.createElement("div");
+        tag.className = "skill-tag glass-card";
+        tag.textContent = skill;
+        tag.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
+        cloud.appendChild(tag);
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Generate more Floating Shapes
+      const floatingShapes = document.querySelector(".floating-shapes");
+      for (let i = 0; i < 30; i++) {
+        const li = document.createElement("li");
+        const size = Math.random() * 60 + 10;
+        const position = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 10;
+
+        li.style.left = `${position}%`;
+        li.style.width = `${size}px`;
+        li.style.height = `${size}px`;
+        li.style.animationDelay = `${delay}s`;
+        li.style.animationDuration = `${duration}s`;
+        li.style.animationTimingFunction = "linear";
+
+        floatingShapes.appendChild(li);
+      }
+    </script>
+  </body>
+</html>
